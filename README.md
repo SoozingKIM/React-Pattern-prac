@@ -12,7 +12,7 @@
 
 이런 경우 합성 컴포넌트 패턴을 사용한다.
 
-### 기본 레이아웃
+### 1. 기본 레이아웃
 
 - `ul`용 (wrapper)
 
@@ -63,3 +63,11 @@ export default AccordionItem;
   </AccordionItem>
 </Accordion>
 ```
+
+### 2. 제어하기 - context API 사용
+
+Accordion 컴포넌트에서 정의한 컨텍스트 값을 연관된 다른 컴포넌트가 받아야한다.  
+AccordionItem 컴포넌트에서 받아야하는 것이다.  
+이 처리를 간단하고 안전하게 하기 위해 Accordion 컴포넌트에서 `커스텀 훅`을 추가한다.
+그리고 `커스텀 훅`을 AccordionItem 컴포넌트에 불러서 사용한다.  
+내용물이 보이고 안 보이고는 CSS 속성을 통해 구현한다.
