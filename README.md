@@ -126,3 +126,28 @@ function App() {
 `children` 값을 함수처럼 보낸다.
 포맷팅할 것이 없으면 `{(item) => item}` 으로 바로 내보낸다.
 포맷팅할 것이 있으면 `{(item) => <Place item={item} />}` 해서 보내면 `Place` 컴포넌트에 넣어서 결과물이 나온다.
+
+## 디바운싱
+
+키보드를 누를 때마다 상태를 갱신하지 않고, 특정 시간 임계값을 정해서 사용자가 그 시간동안 입력을 안 하면 갱신하는 기술.
+
+```js
+// <SearchableList> 컴포넌트
+
+const lastChange = useRef();
+
+function handleChange(e) {
+  if (lastChange.current) {
+    clearTimeout(lastChange.current);
+  }
+  lastChange.current = setTimeout(() => {
+    lastChange.current = null;
+    setSearchTerm(e.target.value);
+  }, 500);
+}
+
+// 중간 생략
+<input type="search" placeholder="Search" onChange={handleChange} />;
+```
+
+`setTimeout`으로 값을 넣어주는 타임을 미뤄주고, `ref`를 이용해 타이머 관리를 한다.
