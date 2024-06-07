@@ -88,3 +88,6 @@ Accordion.Item = AccordionItem; //<Accordion> 객체에 Item 키로 AccordionIte
 ```
 
 컴포넌트로 사용할 때는 `<Accordion.Item>` 으로 사용하면 된다.
+
+## Render Props Pattern
+함수를 children 속성의 값으로 보내면
