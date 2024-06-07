@@ -90,4 +90,39 @@ Accordion.Item = AccordionItem; //<Accordion> 객체에 Item 키로 AccordionIte
 컴포넌트로 사용할 때는 `<Accordion.Item>` 으로 사용하면 된다.
 
 ## Render Props Pattern
-함수를 children 속성의 값으로 보내면
+
+함수를 `children` 속성의 값으로 보내면, 그 함수를 받은 컴포넌트는 함수를 이용해 값을 렌더링한다.
+
+```js
+function SearchableList({ items, children }) {
+  // 중간 생략
+  <ul>
+    {searchResults.map((item, index) => (
+      <li key={index}>{children(item)}</li>
+    ))}
+  </ul>;
+}
+```
+
+`children`을 받아서 함수처럼 출력한다.
+
+```js
+function App() {
+  return (
+    <main>
+      <section>
+        <SearchableList items={PLACES}>
+          {(item) => <Place item={item} />}
+        </SearchableList>
+        <SearchableList items={["item 1", "item 2"]}>
+          {(item) => item}
+        </SearchableList>
+      </section>
+    </main>
+  );
+}
+```
+
+`children` 값을 함수처럼 보낸다.
+포맷팅할 것이 없으면 `{(item) => item}` 으로 바로 내보낸다.
+포맷팅할 것이 있으면 `{(item) => <Place item={item} />}` 해서 보내면 `Place` 컴포넌트에 넣어서 결과물이 나온다.
